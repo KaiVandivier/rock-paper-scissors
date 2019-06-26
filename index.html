@@ -19,19 +19,19 @@
       let winner, message;
       if (playerSelection.toLowerCase() == "rock") {
         [winner, message] = 
-          (computerSelection == "Rock") ? ["tie", "Tie! You both threw Rock."] :
-          (computerSelection == "Paper") ? ["computer", "You lose! Paper covers Rock."] :
-          ["player", "You win! Rock smashes Scissors."]
+            (computerSelection == "Rock") ? ["tie", "Tie! You both threw Rock."] :
+            (computerSelection == "Paper") ? ["computer", "You lose! Paper covers Rock."] :
+            ["player", "You win! Rock smashes Scissors."]
       } else if (playerSelection.toLowerCase() == "paper") {
         [winner, message] = 
-          (computerSelection == "Rock") ? ["player", "You win! Paper covers Rock."] :
-          (computerSelection == "Paper") ? ["tie", "Tie! You both threw Paper."] :
-          ["computer", "You lose! Scissors cut Paper."]
+            (computerSelection == "Rock") ? ["player", "You win! Paper covers Rock."] :
+            (computerSelection == "Paper") ? ["tie", "Tie! You both threw Paper."] :
+            ["computer", "You lose! Scissors cut Paper."]
       } else if (playerSelection.toLowerCase() == "scissors") {
         [winner, message] = 
-          (computerSelection == "Rock") ? ["computer", "You lose! Rock smashes Scissors."] :
-          (computerSelection == "Paper") ? ["player", "You win! Scissors cut Paper."] :
-          ["tie", "Tie! You both threw Scissors."]
+            (computerSelection == "Rock") ? ["computer", "You lose! Rock smashes Scissors."] :
+            (computerSelection == "Paper") ? ["player", "You win! Scissors cut Paper."] :
+            ["tie", "Tie! You both threw Scissors."]
       } else {
         console.log("Invalid play, try again!")
         return
@@ -59,11 +59,11 @@
 
     function printScores(scores) {
       message = "Scores: Ties " + scores.ties + ", Player " 
-        + scores.player + ", Computer " + scores.computer
+          + scores.player + ", Computer " + scores.computer
       console.log(message)
       return
     }
-
   </script>
+  <h1>Play the game in the console! Type <code>game()</code></h1>
 </body>
 </html>
