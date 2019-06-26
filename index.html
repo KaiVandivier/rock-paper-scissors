@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock Paper Scissors</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <script>
+    /* Rock paper scissors */
+    // computer play function: returns r, p, or s
+    const RPS = ["Rock", "Paper", "Scissors"]
+
+    function computerPlay() {
+      return RPS[Math.floor(Math.random() * 3)]
+    }
+
+    function playRound(playerSelection, computerSelection) {
+      playerSelection = playerSelection.toLowerCase()
+      let winner, message;
+      if (playerSelection.toLowerCase() == "rock") {
+        [winner, message] = 
+          (computerSelection == "Rock") ? ["tie", "Tie! You both threw Rock."] :
+          (computerSelection == "Paper") ? ["computer", "You lose! Paper covers Rock."] :
+          ["player", "You win! Rock smashes Scissors."]
+      } else if (playerSelection.toLowerCase() == "paper") {
+        [winner, message] = 
+          (computerSelection == "Rock") ? ["player", "You win! Paper covers Rock."] :
+          (computerSelection == "Paper") ? ["tie", "Tie! You both threw Paper."] :
+          ["computer", "You lose! Scissors cut Paper."]
+      } else if (playerSelection.toLowerCase() == "scissors") {
+        [winner, message] = 
+          (computerSelection == "Rock") ? ["computer", "You lose! Rock smashes Scissors."] :
+          (computerSelection == "Paper") ? ["player", "You win! Scissors cut Paper."] :
+          ["tie", "Tie! You both threw Scissors."]
+      } else {
+        console.log("Invalid play, try again!")
+        return
+      }
+      return [winner, message]
+    }
+
+    function game() {
+      let scores = {ties: 0, player: 0, computer: 0}
+      for (let i=0; i<5; i++) {
+        let playerInput = prompt("Rock, paper, or scissors?")
+        let [winner, message] = playRound(playerInput, computerPlay())
+        console.log(message)
+        if (winner == "player") {
+          scores.player++
+        } else if (winner == "computer") {
+          scores.computer++
+        } else {
+          scores.ties++
+        }
+        printScores(scores)
+      }
+      return
+    }
+
+    function printScores(scores) {
+      message = "Scores: Ties " + scores.ties + ", Player " 
+        + scores.player + ", Computer " + scores.computer
+      console.log(message)
+      return
+    }
+
+  </script>
+</body>
+</html>
