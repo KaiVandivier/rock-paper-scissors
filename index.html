@@ -5,12 +5,64 @@
   <meta charset="UTF-8">
 </head>
 <body>
+  <style>
+    body {
+      text-align: center;
+    }
+  </style>
+  <h1 id='header'>Rock-paper-scissors! Choose your play; first to five wins.</h1>
+  <div id="buttons">
+    <button id="rock" value="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+  </div>
+  <div id="reports"></div>
+
   <script>
-    /* Rock paper scissors */
-    // computer play function: returns r, p, or s
-    const RPS = ["Rock", "Paper", "Scissors"]
+    const btns = document.querySelectorAll('button');
+    btns.forEach((btn) => btn.addEventListener('click', setupRound));
+
+    let scores = {ties: 0, player: 0, computer: 0} // this is bad form -- how to make it local?
+
+    function setupRound(e) {
+      let [winner, message] = playRound(e.target.id, computerPlay());
+      scores = updateScores(winner, scores);
+      displayScores(scores, message);
+      if (scores.player >= 5 || scores.computer >= 5) endGame(winner);
+    }
+
+    function displayScores(scores, message) {
+      const reports = document.querySelector('#reports');
+      const newH2 = document.createElement('h2');
+      const newP = document.createElement('p');
+      newH2.textContent = message;
+      newP.textContent = "Scores: Ties " + scores.ties + ", Player " 
+          + scores.player + ", Computer " + scores.computer;
+      reports.appendChild(newH2);
+      reports.appendChild(newP);     
+    }
+
+    function endGame(winner) {
+      const body = document.querySelector('body');
+      const buttonsDiv = document.querySelector('#buttons');
+      const header = document.querySelector('#header');
+      body.removeChild(buttonsDiv);
+      header.textContent = winner.charAt(0).toUpperCase() + winner.slice(1) + ' wins!'
+    }
+
+    function updateScores(winner, scores) {
+      if (winner == "player") {
+        scores.player++
+      } else if (winner == "computer") {
+        scores.computer++
+      } else {
+        scores.ties++
+      }
+      return scores
+    }
 
     function computerPlay() {
+      const RPS = ["Rock", "Paper", "Scissors"]
       return RPS[Math.floor(Math.random() * 3)]
     }
 
@@ -38,32 +90,6 @@
       }
       return [winner, message]
     }
-
-    function game() {
-      let scores = {ties: 0, player: 0, computer: 0}
-      for (let i=0; i<5; i++) {
-        let playerInput = prompt("Rock, paper, or scissors?")
-        let [winner, message] = playRound(playerInput, computerPlay())
-        console.log(message)
-        if (winner == "player") {
-          scores.player++
-        } else if (winner == "computer") {
-          scores.computer++
-        } else {
-          scores.ties++
-        }
-        printScores(scores)
-      }
-      return
-    }
-
-    function printScores(scores) {
-      message = "Scores: Ties " + scores.ties + ", Player " 
-          + scores.player + ", Computer " + scores.computer
-      console.log(message)
-      return
-    }
   </script>
-  <h1>Play the game in the console! Type <code>game()</code></h1>
 </body>
 </html>
